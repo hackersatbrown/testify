@@ -5,11 +5,11 @@ should = require "should"
 module.exports =
 
   createJsonClient: (opts, auth) ->
-    client = restify.createJsonClient _.extend(
-      url: "http://localhost:8080"
-    , opts)
+    client = restify.createJsonClient _.defaults(opts,
+      url: "http://localhost:#{opts.port or 8080}"
+    )
     if auth?
-      _.defaults auth, { username: "", password: "" }
+      auth = _.defaults auth, { username: "", password: "" }
       client.basicAuth auth.username, auth.password
     client
 
