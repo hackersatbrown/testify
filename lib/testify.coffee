@@ -20,7 +20,7 @@ module.exports =
       handler req, res, data
 
   shouldErr: (done, status) ->
-    (err) ->
+    (err, req, res) ->
       should.exist err
-      if status? then err.should.have.status status 
+      if status? then res.should.have.status status 
       done()
